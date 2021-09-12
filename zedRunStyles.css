@@ -1,0 +1,8 @@
+.primary-caption.secondary.d-block{
+    filter: blur(3px);
+    transition: filter 0.4s linear;
+}
+
+.primary-caption.secondary.d-block:hover{
+    filter: blur(0px);
+}

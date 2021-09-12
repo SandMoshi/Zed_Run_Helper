@@ -1,0 +1,37 @@
+{
+    "name": "Sand's Zed Run Helper",
+    "description": "Provides additional information when on zed.run and related websites",
+    "version": "0.1",
+    "manifest_version": 3,
+    "background": {
+        "service_worker": "background.js"
+    },
+    "permissions": ["storage", "activeTab", "scripting", "tabs", "webNavigation", "scripting"],
+    "host_permissions": [
+        "",
+        "https://knowyourhorses.com/*"
+    ],
+    "action": {
+        "default_popup": "popup.html",
+        "default_icon": {
+            "16": "/icons/icon_16x16.png",
+            "32": "/icons/icon_32x32.png"
+        }
+    },
+    "icons": {
+        "16": "/icons/icon_16x16.png",
+        "32": "/icons/icon_32x32.png"
+    },
+    "content_scripts": [
+        {
+            "matches": ["*://knowyourhorses.com/*"],
+            "js": ["knowYourHorsePage.js"],
+            "css": ["knowYourHorsePage.css"]
+        },
+        {
+            "matches": ["https://zed.run/*"],
+            "js": ["zedRunPage.js"],
+            "css": ["zedRunStyles.css"]
+        }
+    ]
+}
