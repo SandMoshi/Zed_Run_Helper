@@ -1,10 +1,6 @@
 // Meant to run on https://knowyourhorses.com
 
 // https://knowyourhorses.com/horses/92815
-
-
-console.log('B')
-
 const ENUM_FINISH_TIME_MESSAGE = {
     top25: "Top 25%",
     secondQuartile: "Average",
@@ -21,9 +17,7 @@ const ENUM_GSS_LABELS = {
 let gss = null;
 chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
-        console.log('message recevied2')
         if(request.message === 'url_changed'){
-            console.log(request.url);
             const url = request.url;
             if(url.indexOf('https://knowyourhorses.com/horses/') > -1){
                 loadGeneralSpeedStats();
@@ -74,7 +68,7 @@ const loadGeneralSpeedStats = () => {
     // Check if data is recent
     if(!gssLast || gssLast < staleTimestamp){
         // Get new data
-        console.log('Scrape new global data')
+        console.log('Scrape new gss')
         requestScrapeGeneralSpeedStats();
     }else{
         // Use cached data
@@ -92,7 +86,6 @@ const requestScrapeGeneralSpeedStats = async () => {
 
 const loadGssFromLocalStorage = () => {
     gss = JSON.parse(localStorage.getItem('gss'));
-    console.log('gss', gss);
 }
 
 async function getCurrentTab() {

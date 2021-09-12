@@ -1,5 +1,4 @@
 const scrapeGeneralSpeedStats = async () => {
-    console.log('scrapeGeneralSpeedStats()');
     const rows = document.getElementsByTagName('tr');
     const headers = rows[0];
     const DistanceColIndex = headers.innerText.split('\t').indexOf('Distance');

@@ -1,9 +1,7 @@
 // This file runs in the background of the chrome extension
 chrome.tabs.onUpdated.addListener(
     function(tabId, changeInfo, tab){
-        console.log('onUpdated', changeInfo, changeInfo.url)
-        console.log(tab.url)
-        if(changeInfo.url || (tab.url && changeInfo.title)){
+        if(changeInfo.status == 'complete' && tab.active){
             console.log('about to send message')
             setTimeout(() => {
                 chrome.tabs.sendMessage( tabId, {
@@ -33,7 +31,6 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 const scrapeGSS = async (tab) => {
     if (!tab.url) await onTabUrlUpdated(tab.id);
-    console.log('go!');
     const results = await chrome.scripting.executeScript(
         {
             target: {
@@ -60,7 +57,6 @@ function onTabUrlUpdated(tabId) {
 }
 
 async function getCurrentTab() {
-    console.log(chrome.tabs);
     let queryOptions = { active: true, currentWindow: true };
     let [tab] = await chrome.tabs.query(queryOptions);
     return tab;
