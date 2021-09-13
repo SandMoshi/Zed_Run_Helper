@@ -19,7 +19,12 @@ chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
         if(request.message === 'url_changed'){
             const url = request.url;
-            if(url.indexOf('https://knowyourhorses.com/horses/') > -1){
+            if(url.indexOf('https://knowyourhorses.com/horses/' > -1) && url.indexOf('/speed_analysis') > -1){
+                document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', function(event) {
+                    addLegendToSpeedAnalysis();
+                }) : addLegendToSpeedAnalysis();
+            }
+            else if(url.indexOf('https://knowyourhorses.com/horses/') > -1){
                 loadGeneralSpeedStats();
                 enableFinishTimeTooltip();
             }
@@ -42,7 +47,7 @@ const enableFinishTimeTooltip = () => {
             const gssTime = gss[raceDistance];
             const overlay = document.createElement('div');
             overlay.classList.add('finishTimePopup');
-            if(finishTime <= gssTime[ENUM_GSS_LABELS.top25]){
+            if(finishTime && finishTime <= gssTime[ENUM_GSS_LABELS.top25] && finishTime > 0){
                 overlay.innerText = ENUM_FINISH_TIME_MESSAGE.top25;
                 overlay.classList.add('greenText');
             }
@@ -93,3 +98,17 @@ async function getCurrentTab() {
     let [tab] = await chrome.tabs.query(queryOptions);
     return tab;
   }
+
+const addLegendToSpeedAnalysis = async () => {
+    // Check for existing elements
+    if(document.getElementsByClassName('szrh-legend').length > 0){
+        return;
+    }
+    const chartHeaderElements = document.getElementsByClassName('card-header');
+    for( let cardHeader of chartHeaderElements){
+        const legendElement = document.createElement('div');
+        legendElement.classList.add('szrh-legend');
+        legendElement.innerHTML = "<div></div>Your Horse<br/><div class='szrh-greenLine'></div>All Horses";
+        cardHeader.parentElement.insertBefore(legendElement, cardHeader.nextSibling);
+    }
+}

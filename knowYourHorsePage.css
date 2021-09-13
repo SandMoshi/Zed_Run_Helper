@@ -18,3 +18,20 @@
 .redText {
     color: firebrick;
 }
+
+.szrh-legend {
+    margin: 0.25rem auto;
+    padding-right: calc(100% - 150px);
+}
+
+.szrh-legend div {
+    display: inline-block;
+    height: 6px;
+    width: 25px;
+    margin: 2px 8px;
+    background: black;
+}
+                
+.szrh-legend div.szrh-greenLine {
+    background: #75a99f;
+}
