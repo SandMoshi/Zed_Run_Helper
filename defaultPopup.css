@@ -1,0 +1,98 @@
+body{
+    /* background: linear-gradient(to bottom, #BB377D, rgb(129, 66, 101), #333, #333,#333); */
+    background: linear-gradient(to bottom, #BB377D, #FBD3E9, #e6e6e6);
+    /* color: white; */
+    position: relative;
+    border-radius: 10px;
+    min-height: 400px;
+}
+
+.backgroundImage {
+    background-image: url(assets/sean-foley-SEfbeMpjxaM-unsplash.jpg);
+    filter: blur(9px);
+    position: absolute;
+    width: 120%;
+    height: 120%;
+    background-size: cover;
+    left: -20px;
+    top: -20px;
+    z-index: -1;
+}
+
+.extensionTopBar{
+    width: 110%;
+    text-align: center;
+    margin-left: -16px;
+    margin-right: -16px;
+}
+
+.extensionTitle {
+    font-family: 'Roboto Slab', serif;
+    font-weight: 400;
+    color: white;
+    opacity: 0.75;
+}
+
+.subheading{
+    font-family: 'Roboto Slab', serif;
+    font-weight: 400;
+    color: white;
+    opacity: 0.75;
+    margin-left: 0.5rem;
+    font-size: 1rem;
+    text-transform: uppercase;
+}
+
+h3, h4, p {
+    margin: 0.5rem auto;
+}
+
+.ethAdd {
+    font-family: 'Courier New', Courier, monospace;
+    margin: 1.5rem auto 1rem auto;
+    background: #dddddd;
+    color: black;
+    padding: 10px;
+}
+
+.donationContainer {
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 8px;
+    margin: 1rem auto;
+}
+
+h3.donate{
+    display: flex;
+    align-items: center;
+}
+
+img.emoji{
+    width: 15px;
+    height: 15px;
+    margin-left: 0.25rem;
+}
+
+.tokensContainer {
+    width: 100%;
+    padding: auto 1rem;
+    display: flex;
+    justify-content: center;
+}
+
+.tokensContainer img{
+    width: 25px;
+    height: 25px;
+    user-select: none;
+    -webkit-user-drag: none;
+    margin: auto 6px;
+    box-shadow: white;
+}
+
+.settings{
+    min-height: 100px;
+}

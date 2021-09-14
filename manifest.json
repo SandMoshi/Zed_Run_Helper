@@ -12,7 +12,7 @@
         "https://knowyourhorses.com/*"
     ],
     "action": {
-        "default_popup": "popup.html",
+        "default_popup": "defaultPopup.html",
         "default_icon": {
             "16": "/icons/icon_16x16.png",
             "32": "/icons/icon_32x32.png"
