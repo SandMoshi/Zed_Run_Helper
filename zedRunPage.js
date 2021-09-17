@@ -1,5 +1,4 @@
 // Meant to run on Zed.Run Pages
-
 const showFatigue = () => {
     const intervalID = setInterval(() => {
         const rectElements = document.getElementsByTagName('rect');
@@ -21,6 +20,26 @@ const addFatigueValueToDom = (rectElements) => {
     fatigueContainer.appendChild(fatigueText);
 }
 
+const updateWalletBlur = (blurEnabled) => {
+    const root = document.querySelector(':root');
+    console.log('blurEnabled', blurEnabled);
+    localStorage.setItem('hideWalletBalanceOnHover', JSON.stringify(blurEnabled));
+    if(blurEnabled){
+        root.style.setProperty('--walletBlur', '3px');
+    }
+    else{
+        root.style.setProperty('--walletBlur', '0px');
+    }
+}
+
+// As soon as possible, retrieve the recent wallet blur settings and update css
+(() => {
+    const hideWalletBalance = JSON.parse(localStorage.getItem('hideWalletBalanceOnHover')) || false;
+    updateWalletBlur(hideWalletBalance);
+})();
+
+
+
 chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
         console.log('message recevied 1')
@@ -29,6 +48,9 @@ chrome.runtime.onMessage.addListener(
             if(url.indexOf('https://zed.run/racehorse/') > -1){
                 showFatigue();
             }
+        }
+        if(request.message === 'walletBlur_changed'){
+            updateWalletBlur(request.blurEnabled || false);
         }
     }
 )

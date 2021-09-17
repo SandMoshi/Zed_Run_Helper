@@ -9,11 +9,17 @@
     <div class="extensionTopBar">
       <h2 class="extensionTitle">SAND'S ZED RUN HELPER</h2>
     </div>
-    <h3 class="subheading">Settings</h2>
-    <div class="settings">
+    <div class="settings box">
+        <h3 class="subheading">Settings</h2>
+          <div class="hoverSettingContainer">
+              <label class="switch">
+                  <input class="hoverSettingInput" type="checkbox">
+                  <span class="slider round"></span>
+                </label>
+                <p>Keep Wallet Balance Hidden</p>
+          </div>
     </div>
-    <h3 class="subheading">Donate</h2>
-    <div class="donationContainer">
+    <div class="donationContainer box">
       <h3 class="donate">Want to support this project? <img class="emoji smile" src='assets/smile_emoji.png'></h3>
       <p>Accepting ERC20 Tokens</p>
       <div class="tokensContainer">
@@ -21,9 +27,9 @@
           <img src="assets/weth.png"/>
           <img src="assets/bat.svg"/>
           <img src="assets/usdt.svg"/>
-        </div>
+      </div>
       <p class='ethAdd'>0x20DFf273ECfDEd523974dbf73504F0Bf68f9cb23</p>
     </div>
-    <!-- <div class="backgroundImage"></div> -->
+    <script src='defaultPopup.js'></script>
   </body>
 </html>

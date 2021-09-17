@@ -8,7 +8,6 @@
     },
     "permissions": ["storage", "activeTab", "scripting", "tabs", "webNavigation", "scripting"],
     "host_permissions": [
-        "",
         "https://knowyourhorses.com/*"
     ],
     "action": {

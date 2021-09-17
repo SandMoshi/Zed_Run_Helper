@@ -1,5 +1,9 @@
+:root {
+    --walletBlur: 0px;
+}
+
 .primary-caption.secondary.d-block{
-    filter: blur(3px);
+    filter: blur(var(--walletBlur));
     transition: filter 0.4s linear;
 }
 
