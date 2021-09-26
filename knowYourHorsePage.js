@@ -14,29 +14,17 @@ const ENUM_GSS_LABELS = {
     top75: '75%'
 }
 
-let gss = null;
 chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
+        console.log('message received by content script: ', request.message);
         if(request.message === 'url_changed'){
             const url = request.url;
-            if(url.indexOf('https://knowyourhorses.com/horses/' > -1) && url.indexOf('/speed_analysis') > -1){
-                document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', function(event) {
-                    addLegendToSpeedAnalysis();
-                }) : addLegendToSpeedAnalysis();
-            }
-            else if(url.indexOf('https://knowyourhorses.com/horses/') > -1){
-                loadGeneralSpeedStats();
-                enableFinishTimeTooltip();
-            }
-        }
-        else if(request.message === 'gssUpdated'){
-            loadGssFromLocalStorage();
         }
         sendResponse('thanks')
     }
 )
 
-const enableFinishTimeTooltip = () => {
+const enableFinishTimeTooltip = (gss) => {
     const table = document.getElementsByTagName('tbody')[0];
     if(table){
         const eventCells = document.getElementsByClassName('event');
@@ -66,7 +54,7 @@ const enableFinishTimeTooltip = () => {
     }
 }
 
-const loadGeneralSpeedStats = () => {
+const loadGeneralSpeedStats = async () => {
     const gssLast = JSON.parse(localStorage.getItem('gssLast'));
     const today = new Date();
     const staleTimestamp = today.setDate(today.getDate() - 4);
@@ -74,7 +62,8 @@ const loadGeneralSpeedStats = () => {
     if(!gssLast || gssLast < staleTimestamp){
         // Get new data
         console.log('Scrape new gss')
-        requestScrapeGeneralSpeedStats();
+        const gss = await fetchGeneralSpeedStatPage();
+        enableFinishTimeTooltip(gss);
     }else{
         // Use cached data
         console.log('Use cached data')
@@ -82,15 +71,9 @@ const loadGeneralSpeedStats = () => {
     }
 }
 
-const requestScrapeGeneralSpeedStats = async () => {
-    // open new tab, scrape data, close tab
-    chrome.runtime.sendMessage('openGssTab', async function(response){
-        console.log(response)
-    });
-}
-
 const loadGssFromLocalStorage = () => {
-    gss = JSON.parse(localStorage.getItem('gss'));
+    const gss = JSON.parse(localStorage.getItem('gss'));
+    enableFinishTimeTooltip(gss);
 }
 
 async function getCurrentTab() {
@@ -112,3 +95,67 @@ const addLegendToSpeedAnalysis = async () => {
         cardHeader.parentElement.insertBefore(legendElement, cardHeader.nextSibling);
     }
 }
+
+const fetchGeneralSpeedStatPage = async () => {
+    const response = await fetch('https://knowyourhorses.com/speed-statistics')
+    const data = await response.text()
+    return scrapeGeneralSpeedStats(parseHTMLString(data))
+}
+
+const parseHTMLString = (htmlStringData) => {
+    const htmlElement = document.createElement('html');
+    htmlElement.innerHTML = htmlStringData;
+    return htmlElement;
+}
+
+const scrapeGeneralSpeedStats = async (DOM) => {
+    const rows = DOM.getElementsByTagName('tr');
+    const headers = rows[0];
+    let splitHeaders = headers.innerText.split('\n')
+    splitHeaders.forEach((item, index) => splitHeaders[index] = item.trim()) 
+    if(splitHeaders[0] === ''){
+        splitHeaders.splice(0, 1);
+    }
+    const DistanceColIndex =splitHeaders.indexOf('Distance');
+    const top25ColIndex = splitHeaders.indexOf('25%');
+    const medianColIndex = splitHeaders.indexOf('Median');
+    const top75ColIndex = splitHeaders.indexOf('75%');
+    const stats = {}
+    
+    for (let index = 1; index < rows.length; index++){
+        const headerRow = rows[0];
+        const row = rows[index];
+        const distance = row.children[0].innerText;
+        const top25Time = row.children[top25ColIndex].innerText;
+        const medianTime = row.children[medianColIndex].innerText;
+        const top75Time = row.children[top75ColIndex].innerText;
+        stats[distance] = {
+            [headerRow.children[top25ColIndex].innerText] : top25Time,
+            [headerRow.children[medianColIndex].innerText]: medianTime,
+            [headerRow.children[top75ColIndex].innerText]: top75Time
+        }
+    }
+    
+    localStorage.setItem('gssLast', JSON.stringify(Date.now()));
+    localStorage.setItem('gss', JSON.stringify(stats));
+    return stats;
+}
+
+function onContentScriptLoad(){
+    // Runs on KYH page load, and enables features depending on page
+    if(location.href.indexOf('https://knowyourhorses.com/horses/') > -1){
+        console.log('on horse page!');
+        loadGeneralSpeedStats();
+    }
+    else{
+        console.log(location.href.indexOf('https://knowyourhorses.com/horses/'))
+    }
+    if(location.href.indexOf('https://knowyourhorses.com/horses/' > -1) && location.href.indexOf('/speed_analysis') > -1){
+        document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', function(event) {
+            addLegendToSpeedAnalysis();
+        }) : addLegendToSpeedAnalysis();
+    }
+}
+
+// Run these functions immediately
+onContentScriptLoad();

@@ -14,13 +14,7 @@ chrome.tabs.onUpdated.addListener(
 )
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-    if(message === 'openGssTab'){
-        chrome.tabs.create({
-            url: 'https://knowyourhorses.com/speed-statistics',
-        }, scrapeGSS)
-        sendResponse('success');
-    }
-    else if(message === 'closeCurrentTab'){
+    if(message === 'closeCurrentTab'){
         getCurrentTab().then( currentTab => {
             const currentTabId = currentTab.id;
             chrome.tabs.remove(currentTabId);
@@ -28,19 +22,6 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         })
     }
 })
-
-const scrapeGSS = async (tab) => {
-    if (!tab.url) await onTabUrlUpdated(tab.id);
-    const results = await chrome.scripting.executeScript(
-        {
-            target: {
-                tabId: tab.id
-            },
-            files: ['scrapeGlobalSpeedStats.js']
-        }
-    );
-    console.warn('results', results);
-}
 
 function onTabUrlUpdated(tabId) {
     return new Promise((resolve, reject) => {
