@@ -32,25 +32,29 @@ const updateWalletBlur = (blurEnabled) => {
     }
 }
 
-// As soon as possible, retrieve the recent wallet blur settings and update css
-(() => {
+const loadPreviousWalletBlurSetting = () => {
     const hideWalletBalance = JSON.parse(localStorage.getItem('hideWalletBalanceOnHover')) || false;
     updateWalletBlur(hideWalletBalance);
-})();
-
+};
 
 
 chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
         console.log('message recevied 1')
-        if(request.message === 'url_changed'){;
-            const url = request.url;
-            if(url.indexOf('https://zed.run/racehorse/') > -1){
-                showFatigue();
-            }
-        }
         if(request.message === 'walletBlur_changed'){
             updateWalletBlur(request.blurEnabled || false);
         }
     }
 )
+
+function onContentScriptLoad(){
+    // Runs on Zed Run page load, and enables features depending on page
+    console.log('on zed run page!');
+    loadPreviousWalletBlurSetting();
+    if(location.href.indexOf('https://zed.run/racehorse/') > -1){
+        showFatigue();
+    }
+}
+
+// Run these functions immediately
+onContentScriptLoad();
