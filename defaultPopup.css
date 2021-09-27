@@ -5,6 +5,7 @@ body{
     position: relative;
     border-radius: 10px;
     min-height: 400px;
+    max-width: 400px;
 }
 
 .backgroundImage {
@@ -96,6 +97,12 @@ img.emoji{
     min-height: 100px;
 }
 
+.settings p {
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: #3d3d3d;
+}
+
 .box{
     background: rgba(255, 255, 255, 0.85);
     border-radius: 8px;
@@ -104,7 +111,10 @@ img.emoji{
 
 .hoverSettingContainer{
     display: flex;
+    background: rgba(255,255,255,0.4);
+    padding: 0.125rem 0;
 }
+
 
 .hoverSettingContainer p {
   transition: color 0.2s linear;
@@ -113,6 +123,48 @@ img.emoji{
 .hoverSettingContainer p:hover {
   cursor: pointer;
   color: #bf4184;
+}
+
+/* Distance button toggles */
+.ditanceToggleBtnGroup {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.highlightRaces {
+  padding: 0.25rem;
+}
+
+.highlightRaces p{
+  margin-left: 0.5rem;
+  text-transform: uppercase;
+}
+
+.distanceToggleBtn{
+  font-size: 12px;
+  background: hsl(330deg 7% 77%);
+  color: white;
+  border-radius: 1rem;
+  padding: 0.25rem;
+  width: 60px;
+  margin: 0.25rem;
+  cursor: pointer;
+}
+
+.emptyDistanceToggleBtn{
+  width: 60px;
+  margin: 0.25rem;
+}
+
+.distanceToggleBtn:not(.on):hover {
+  background: hsl(145, 30%, 60%);
+  transition: ease-in-out 0.4s;
+}
+
+.distanceToggleBtn.on{
+  background: #27ae60;
+  transition: ease-in-out 0.4s;
 }
 
 /* ============================================= */

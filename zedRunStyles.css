@@ -10,3 +10,11 @@
 .primary-caption.secondary.d-block:hover{
     filter: blur(0px);
 }
+
+.highlightRaceRow {
+    background: rgba(119, 146, 255, 0.08);
+}
+
+.highlightRaceRow .event>div, .highlightRaceRow .distance>div {
+    color: gold;
+}
