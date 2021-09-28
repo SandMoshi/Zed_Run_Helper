@@ -1,6 +1,7 @@
 {
-    "name": "Sand's Zed Run Helper",
+    "name": "__MSG_extName__",
     "description": "Provides additional information when on zed.run and related websites",
+    "default_locale": "en_US",
     "version": "0.1",
     "manifest_version": 3,
     "background": {

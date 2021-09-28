@@ -2,11 +2,17 @@
 
 // https://knowyourhorses.com/horses/92815
 const ENUM_FINISH_TIME_MESSAGE = {
-    top25: "Top 25%",
-    secondQuartile: "Average",
-    thirdQuartile: "Below Average",
-    bottomQuartile: "Bottom 25%",
+    top25: chrome.i18n.getMessage("top25"),
+    secondQuartile: chrome.i18n.getMessage("secondQuartile"),
+    thirdQuartile: chrome.i18n.getMessage("thirdQuartile"),
+    bottomQuartile: chrome.i18n.getMessage("bottomQuartile"),
 }
+// const ENUM_FINISH_TIME_MESSAGE = {
+//     top25: "Top 25%",
+//     secondQuartile: "Average",
+//     thirdQuartile: "Below Average",
+//     bottomQuartile: "Bottom 25%",
+// }
 
 const ENUM_GSS_LABELS = {
     top25: '25%',

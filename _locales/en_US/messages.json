@@ -1,0 +1,22 @@
+{
+    "extName": {
+        "message": "Sand's Zed Run Helper",
+        "description": "Extension Name"
+    },
+    "top25": {
+        "message": "Top 25%",
+        "description": "Text that goes under the race times, indicating percetile. Needs to be short."
+    },
+    "secondQuartile": {
+        "message": "Average",
+        "description": "Text that goes under the race times, indicating percetile. Needs to be short." 
+    },
+    "thirdQuartile": {
+        "message": "Below Average",
+        "description": "Text that goes under the race times, indicating percetile. Needs to be short." 
+    },
+    "bottomQuartile": {
+        "message": "Bottom 25%",
+        "description": "Text that goes under the race times, indicating percetile. Needs to be short."
+    }
+}
