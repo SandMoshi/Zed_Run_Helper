@@ -1,6 +1,6 @@
 {
     "extName": {
-        "message": "Sand's Zed Run Helper",
+        "message": "Sandman's Zed Run Helper",
         "description": "Extension Name"
     },
     "top25": {
@@ -18,5 +18,37 @@
     "bottomQuartile": {
         "message": "Bottom 25%",
         "description": "Text that goes under the race times, indicating percetile. Needs to be short."
+    },
+    "yourHorse": {
+        "message": "Your Horse",
+        "description": "This goes inside the legend on the chart to indicate that this line represents data for your horse only. Other line represents data collected from all horses."
+    },
+    "allHorses": {
+        "message": "All Horses",
+        "description": "This goes inside the legend on the chart to indicate that this line represents data collected from all horses on zedrun. Other line represents data from just your horse."
+    },
+    "openInKYH":{
+        "message": "Open in KYH",
+        "description": "The text for the button that gets added to the opensea page. KYH does not translate."
+    },
+    "settings": {
+        "message":"Settings",
+        "description": "Refers to the extension options the user can change"
+    },
+    "hiddenWallet": {
+        "message":"Keep Wallet Balance Hidden",
+        "description": "Asks the user if they want the amount of crypto in their wallet to be readable. If they choose yes, to hide them, the values will be blurred."
+    },
+    "highlightRacesByD": {
+        "message":"Highlight Races by Distance:",
+        "description": "Instructions for the section that lets the user select which race distances they want highlighted for them so that they stand out from the other races and makes it easier for them to identify"
+    },
+    "supportProject": {
+        "message":"Want to support this project?",
+        "description": "Asking for donations"
+    },
+    "acceptingTokensMsg": {
+        "message":"Accepting ERC20 Tokens",
+        "description": "Explaining which types of crypo is accepted as donation"
     }
 }

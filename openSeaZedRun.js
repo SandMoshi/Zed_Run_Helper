@@ -21,7 +21,7 @@ const addKYHButton = (horseTokenId) => {
     kyhAnchorTag.classList.add('szrh_openInKyh');
     kyhAnchorTag.setAttribute('href', `https://knowyourhorses.com/horses/${horseTokenId}`);
     kyhAnchorTag.setAttribute('target', '_blank');
-    kyhAnchorTag.innerText = 'Open in KYH'
+    kyhAnchorTag.innerText = chrome.i18n.getMessage("openInKYH");
     const buttonGroup = document.getElementsByClassName('item--collection-toolbar-wrapper')[0];
     // buttonGroup.appendChild(kyhAnchorTag);
     buttonGroup.parentElement.insertBefore(kyhAnchorTag, buttonGroup);

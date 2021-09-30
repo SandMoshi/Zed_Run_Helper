@@ -32,6 +32,7 @@ body{
     font-weight: 400;
     color: white;
     opacity: 0.75;
+    text-transform: uppercase;
 }
 
 .subheading{

@@ -1,18 +1,11 @@
 // Meant to run on https://knowyourhorses.com
 
-// https://knowyourhorses.com/horses/92815
 const ENUM_FINISH_TIME_MESSAGE = {
     top25: chrome.i18n.getMessage("top25"),
     secondQuartile: chrome.i18n.getMessage("secondQuartile"),
     thirdQuartile: chrome.i18n.getMessage("thirdQuartile"),
     bottomQuartile: chrome.i18n.getMessage("bottomQuartile"),
 }
-// const ENUM_FINISH_TIME_MESSAGE = {
-//     top25: "Top 25%",
-//     secondQuartile: "Average",
-//     thirdQuartile: "Below Average",
-//     bottomQuartile: "Bottom 25%",
-// }
 
 const ENUM_GSS_LABELS = {
     top25: '25%',
@@ -97,7 +90,7 @@ const addLegendToSpeedAnalysis = async () => {
     for( let cardHeader of chartHeaderElements){
         const legendElement = document.createElement('div');
         legendElement.classList.add('szrh-legend');
-        legendElement.innerHTML = "<div></div>Your Horse<br/><div class='szrh-greenLine'></div>All Horses";
+    legendElement.innerHTML = `<div></div>${chrome.i18n.getMessage("yourHorse")}<br/><div class='szrh-greenLine'></div>${chrome.i18n.getMessage("allHorses")}`;
         cardHeader.parentElement.insertBefore(legendElement, cardHeader.nextSibling);
     }
 }

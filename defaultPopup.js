@@ -64,6 +64,14 @@ async function getCurrentTab() {
     return tab;
 }
 
+function localizeStrings(){
+    document.querySelectorAll('[data-locale]').forEach(elem => {
+        elem.innerText = chrome.i18n.getMessage(elem.dataset.locale)
+    })
+}
+
+localizeStrings();
+
 class highlightRaceByDistanceClass {
     constructor(){
         this.distances = ['1000m', '1200m', '1400m','1600m','1800m','2000m','2200m','2400m']
