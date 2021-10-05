@@ -1,0 +1,43 @@
+{
+    "name": "__MSG_extName__",
+    "description": "Provides additional information when on zed.run and related websites",
+    "default_locale": "en_US",
+    "version": "0.1",
+    "manifest_version": 3,
+    "background": {
+        "service_worker": "background.js"
+    },
+    "permissions": ["storage", "activeTab", "scripting", "tabs", "webNavigation", "scripting"],
+    "host_permissions": [
+        "https://knowyourhorses.com/*",
+        "https://zedrun.tools/*"
+    ],
+    "action": {
+        "default_popup": "defaultPopup.html",
+        "default_icon": {
+            "16": "/icons/icon_16x16.png",
+            "32": "/icons/icon_32x32.png"
+        }
+    },
+    "icons": {
+        "16": "/icons/icon_16x16.png",
+        "32": "/icons/icon_32x32.png"
+    },
+    "content_scripts": [
+        {
+            "matches": ["*://knowyourhorses.com/*"],
+            "js": ["knowYourHorsePage.js"],
+            "css": ["knowYourHorsePage.css"]
+        },
+        {
+            "matches": ["https://zed.run/*"],
+            "js": ["zedRunPage.js"],
+            "css": ["zedRunStyles.css"]
+        },
+        {
+            "matches": ["https://opensea.io/assets/matic/0xa5f1ea7df861952863df2e8d1312f7305dabf215/*"],
+            "js": ["openSeaZedRun.js"],
+            "css": ["openSeaZedRun.css"]
+        }
+    ]
+}
