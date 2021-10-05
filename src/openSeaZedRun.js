@@ -69,7 +69,6 @@ const detectIfDarkMode = () => {
 function onContentScriptLoad(){
     isDarkMode = detectIfDarkMode();
     console.log('loaded. isDark', isDarkMode)
-    console.log()
     if(location.href.indexOf('https://opensea.io/assets/matic/0xa5f1ea7df861952863df2e8d1312f7305dabf215/') > -1){
         const firstParthOfUrl = 'https://opensea.io/assets/matic/0xa5f1ea7df861952863df2e8d1312f7305dabf215/';
         const lastPartOfUrl = location.href.substring(firstParthOfUrl.length - 1,  location.href.length);

@@ -86,13 +86,11 @@ chrome.runtime.onMessage.addListener(
 
 function onContentScriptLoad(){
     // Runs on Zed Run page load, and enables features depending on page
-    console.log('on zed run page!');
     loadPreviousWalletBlurSetting();
     loadPreviousSettings();
     if(location.href.indexOf('https://zed.run/racehorse/') > -1){
         showFatigue();
     }
-    console.log(location.href.indexOf('https://zed.run/racing/events'))
     if(location.href.indexOf('https://zed.run/racing/events') > -1 ){
         loadHightlightRaceByDistanceSettingsandRace();
         // Listen to changes in DOM

@@ -152,12 +152,8 @@ function displayZedRunToolsFrame(){
 function onContentScriptLoad(){
     // Runs on KYH page load, and enables features depending on page
     if(location.href.indexOf('https://knowyourhorses.com/horses/') > -1){
-        console.log('on horse page!');
         loadGeneralSpeedStats();
         displayZedRunToolsFrame();
-    }
-    else{
-        console.log(location.href.indexOf('https://knowyourhorses.com/horses/'))
     }
     if(location.href.indexOf('https://knowyourhorses.com/horses/' > -1) && location.href.indexOf('/speed_analysis') > -1){
         document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', function(event) {
