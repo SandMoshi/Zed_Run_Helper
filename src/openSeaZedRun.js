@@ -1,4 +1,4 @@
-console.log('openSea page');
+// This script runs on the open seas pages, specifically on the zed run horse page
 
 // global
 let isDarkMode = false;
@@ -117,14 +117,14 @@ const listenForUrlChange = () => {
     if (url !== lastUrl) {
       lastUrl = url;
       console.log('new url')
-      showKyhButton()
+      showThirdPartyButtons()
     }
   }
   const observer = new MutationObserver(urlChangeObserver);
   observer.observe(document, { childList:true, attributes: false, subtree: true })
 }
 
-const showKyhButton = () => {
+const showThirdPartyButtons = () => {
   if(location.href.indexOf('https://opensea.io/assets/matic/0xa5f1ea7df861952863df2e8d1312f7305dabf215/') > -1){
     const firstParthOfUrl = 'https://opensea.io/assets/matic/0xa5f1ea7df861952863df2e8d1312f7305dabf215/';
     const lastPartOfUrl = location.href.substring(firstParthOfUrl.length - 1,  location.href.length);
@@ -136,8 +136,8 @@ const showKyhButton = () => {
 
 function onContentScriptLoad(){
     isDarkMode = detectIfDarkMode();
-    console.log('loaded. isDark', isDarkMode);
-    showKyhButton();
+    console.log('isDark', isDarkMode);
+    showThirdPartyButtons();
     listenForUrlChange();
 }
 
