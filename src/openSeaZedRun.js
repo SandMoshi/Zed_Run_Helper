@@ -3,38 +3,63 @@ console.log('openSea page');
 // global
 let isDarkMode = false;
 
-const addKYHButton = (horseTokenId) => {
+const addThirdPartyButtons = (horseTokenId) => {
     if(!horseTokenId){ return }
-    const kyhAnchorTag = document.createElement('a');
-    // Add KYH link
-    kyhAnchorTag.classList.add('szrh_openInKyh');
-    if(isDarkMode){
-        kyhAnchorTag.classList.add('szrh_openInKyh_dark');
+
+    const sitesToSupport = [
+      "kyh",
+      "hawku"
+    ]
+
+    function createButton(site){
+      // site can be 'kyh' or 'hawku'
+      let hyperlink = '';
+      let textVariable = null;
+      switch(site){
+        case('kyh'): {
+          hyperlink = `https://knowyourhorses.com/horses/${horseTokenId}`;
+          textVariable = 'openInKYH';
+          break;
+        }
+        case('hawku'): {
+          hyperlink = `https://www.hawku.com/horse/${horseTokenId}`
+          textVariable = 'openInHawku';
+        }
+      }
+      const AnchorTag = document.createElement('a');
+      AnchorTag.classList.add('szrh_openInKyh');
+      if(isDarkMode){
+          AnchorTag.classList.add('szrh_openInKyh_dark');
+      }
+      AnchorTag.setAttribute('href', hyperlink);
+      AnchorTag.setAttribute('target', '_blank');
+      AnchorTag.innerText = chrome.i18n.getMessage(textVariable);
+      // Add Horse Icon
+      const horseIcon = document.createElement('img');
+      horseIcon.src= chrome.runtime.getURL('icons/icon_32x32.png');
+      AnchorTag.appendChild(horseIcon);
+      return AnchorTag;
     }
-    kyhAnchorTag.setAttribute('href', `https://knowyourhorses.com/horses/${horseTokenId}`);
-    kyhAnchorTag.setAttribute('target', '_blank');
-    kyhAnchorTag.innerText = chrome.i18n.getMessage("openInKYH");
-    // Add Horse Icon
-    const horseIcon = document.createElement('img');
-    horseIcon.src= chrome.runtime.getURL('icons/icon_32x32.png');
-    kyhAnchorTag.appendChild(horseIcon);
 
     let buttonGroup = document.getElementsByClassName('item--collection-toolbar-wrapper')[0];
-    if(!buttonGroup){
-      let counter = 0;
-      let maxCount = 10;
-      let intervalID = setInterval( () => {
-        buttonGroup = document.getElementsByClassName('item--collection-toolbar-wrapper')[0];
-        console.log(buttonGroup);
-        if(buttonGroup){
-          clearInterval(intervalID);
-          addKYHButton(horseTokenId);
-        }
-        counter >= maxCount && clearInterval(intervalID);
-        counter++;
-      },1000);
-    }
-    buttonGroup.parentElement.insertBefore(kyhAnchorTag, buttonGroup);
+    sitesToSupport.forEach(site => {
+      const anchorElement = createButton(site);
+      if(!buttonGroup){
+        let counter = 0;
+        let maxCount = 10;
+        let intervalID = setInterval( () => {
+          buttonGroup = document.getElementsByClassName('item--collection-toolbar-wrapper')[0];
+          console.log(buttonGroup);
+          if(buttonGroup){
+            clearInterval(intervalID);
+            addThirdPartyButtons(horseTokenId);
+          }
+          counter >= maxCount && clearInterval(intervalID);
+          counter++;
+        },1000);
+      }
+      buttonGroup.parentElement.insertBefore(anchorElement, buttonGroup);
+    });
 }
 
 function isColorDark(color) {
@@ -105,7 +130,7 @@ const showKyhButton = () => {
     const lastPartOfUrl = location.href.substring(firstParthOfUrl.length - 1,  location.href.length);
     const horseTokenId = lastPartOfUrl.split('/')[1];
     console.log('go');
-    addKYHButton(horseTokenId);
+    addThirdPartyButtons(horseTokenId);
   }
 }
 

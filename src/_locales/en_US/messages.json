@@ -29,7 +29,11 @@
     },
     "openInKYH":{
         "message": "View on KYH",
-        "description": "The text for the button that gets added to the opensea page. KYH does not translate."
+        "description": "The text for the button that gets added to the opensea page. KYH  is a proper noun and should not be translated translate."
+    },
+    "openInHawku":{
+        "message": "View on Hawku",
+        "description": "The text for the button that gets added to the opensea page. Hawku is a proper noun and should not be translated translate."
     },
     "settings": {
         "message":"Settings",
