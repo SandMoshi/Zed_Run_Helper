@@ -2,12 +2,15 @@
     padding: 0.5rem 0.5rem;
     color: #333;
     text-decoration: none;
-    border: solid 1px rgb(118, 118, 118);
-    display: block;
-    height: auto;
-    width: 110px;
+    border: solid 1px rgb(229, 232, 235);
+    height: 46px;
+    width: 140px;
     border-radius: 5px;
     transition: all 0.4s ease-in-out;
+    margin-right: 1rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 .szrh_openInKyh:hover{
@@ -23,4 +26,9 @@
 .szrh_openInKyh_dark:hover {
     color: #333;
     background: #dfd8c8;
+}
+
+.szrh_openInKyh>img{
+    width: 24px;
+    margin-left: auto;
 }

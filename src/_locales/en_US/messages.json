@@ -28,7 +28,7 @@
         "description": "This goes inside the legend on the chart to indicate that this line represents data collected from all horses on zedrun. Other line represents data from just your horse."
     },
     "openInKYH":{
-        "message": "Open in KYH",
+        "message": "View on KYH",
         "description": "The text for the button that gets added to the opensea page. KYH does not translate."
     },
     "settings": {

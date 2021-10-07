@@ -4,7 +4,6 @@ const handleHoverSettingToggle = (toggleContainer, target) => {
         toggleInput.checked = !toggleInput.checked
     }
     const checked = toggleInput.checked || false;
-    console.log('Hover Hidden is checked:', checked);
     localStorage.setItem('hideWalletBalanceOnHover', JSON.stringify(checked));
     // send message to zed.run tab (if active tab) to update blur
     sendWalletBlurMessageToZedRun(checked);
@@ -106,7 +105,6 @@ class highlightRaceByDistanceClass {
             const container = document.getElementById('ditanceToggleBtnGroup');
             const element = container.getElementsByClassName('distanceToggleBtn')[index];
             if(element.innerText !== distance){
-                console.log(distance, ' vs ', element);
                 throw Error('did not select correct item')
             }
             // If enabled for this distance, change appearance of the button
@@ -121,11 +119,8 @@ class highlightRaceByDistanceClass {
 const highlightRaceByDistance = new highlightRaceByDistanceClass();
 
 const highlightRacesByDistanceButtons = document.getElementsByClassName('distanceToggleBtn');
-console.log('highlightRacesByDistanceButtons', highlightRacesByDistanceButtons);
-for( let button of highlightRacesByDistanceButtons){
-    console.log('button', button);
+for( let button of highlightRacesByDistanceButtons){s
     button.addEventListener('click', () => {
-        console.log('button clicked', button);
         highlightRaceByDistance.toggleButton(button);
     })
 };
