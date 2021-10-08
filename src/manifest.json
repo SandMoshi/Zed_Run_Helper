@@ -2,12 +2,12 @@
     "name": "__MSG_extName__",
     "description": "Provides additional information when on zed.run and related websites",
     "default_locale": "en_US",
-    "version": "0.1",
+    "version": "1.1",
     "manifest_version": 3,
     "background": {
         "service_worker": "background.js"
     },
-    "permissions": ["storage", "activeTab", "scripting", "tabs", "webNavigation", "scripting"],
+    "permissions": ["activeTab", "tabs"],
     "host_permissions": [
         "https://knowyourhorses.com/*",
         "https://zedrun.tools/*"
