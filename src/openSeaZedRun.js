@@ -44,21 +44,18 @@ const addThirdPartyButtons = (horseTokenId) => {
     let buttonGroup = document.getElementsByClassName('item--collection-toolbar-wrapper')[0];
     sitesToSupport.forEach(site => {
       const anchorElement = createButton(site);
-      if(!buttonGroup){
-        let counter = 0;
-        let maxCount = 10;
-        let intervalID = setInterval( () => {
-          buttonGroup = document.getElementsByClassName('item--collection-toolbar-wrapper')[0];
-          console.log(buttonGroup);
-          if(buttonGroup){
-            clearInterval(intervalID);
-            addThirdPartyButtons(horseTokenId);
-          }
-          counter >= maxCount && clearInterval(intervalID);
-          counter++;
-        },1000);
-      }
-      buttonGroup.parentElement.insertBefore(anchorElement, buttonGroup);
+      let counter = 0;
+      let maxCount = 10;
+      let intervalID = setInterval( () => {
+        buttonGroup = document.getElementsByClassName('item--collection-toolbar-wrapper')[0];
+        if(buttonGroup){
+          clearInterval(intervalID);
+          // addThirdPartyButtons(horseTokenId);
+          buttonGroup.parentElement.insertBefore(anchorElement, buttonGroup);
+        }
+        counter >= maxCount && clearInterval(intervalID);
+        counter++;
+      },1000);
     });
 }
 
